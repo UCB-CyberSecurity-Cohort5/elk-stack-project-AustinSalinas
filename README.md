@@ -36,7 +36,7 @@ Load balancing ensures that the application will be highly redundant, in additio
 - Load balancers may protect from DDoS attacks. 
 - A jumpbox offers extensive software library, automated backups, and customizations.
 
-Integrating an ELK server allows users to easily monitor the vulnerable VMs for changes to the _____ and system _____.
+Integrating an ELK server allows users to easily monitor the vulnerable VMs for changes to the logs and system metrics.
 - Filebeat monitors log files for locations that can be specified by a system administrator. Filebeat can then be used to forward and aggregate all relatable data to a centralized location
 - Metricbeat can be utilized to record metrics and statistics in respect to each service being run on various systems. Similarly, Metricbeat will send all data to a centralized location for ease of monitoring.
 The configuration details of each machine may be found below.
