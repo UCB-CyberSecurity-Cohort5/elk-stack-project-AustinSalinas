@@ -12,7 +12,12 @@ The files in this repository were used to configure the network depicted below.
 
 These files have been tested and used to generate a live ELK deployment on Azure. They can be used to either recreate the entire deployment pictured above. Alternatively, select portions of the YAML file may be used to install only certain pieces of it, such as Filebeat.
 
-  - _TODO: Enter the playbook file._
+  - filebeat-config.yml
+  - filebeat-playbook.yml
+  - metricbeat-config.yml
+  - metricbeat-playbook.yml
+  - installWeb.yml
+  - install-elk.yml
 
 This document contains the following details:
 - Description of the Topologu
@@ -27,50 +32,58 @@ This document contains the following details:
 
 The main purpose of this network is to expose a load-balanced and monitored instance of DVWA, the D*mn Vulnerable Web Application.
 
-Load balancing ensures that the application will be highly _____, in addition to restricting _____ to the network.
-- _TODO: What aspect of security do load balancers protect? What is the advantage of a jump box?_
+Load balancing ensures that the application will be highly redundant, in addition to restricting access to the network.
+- Load balancers may protect from DDoS attacks. 
+- A jumpbox offers extensive software library, automated backups, and customizations.
 
 Integrating an ELK server allows users to easily monitor the vulnerable VMs for changes to the _____ and system _____.
-- _TODO: What does Filebeat watch for?_
-- _TODO: What does Metricbeat record?_
-
+- Filebeat monitors log files for locations that can be specified by a system administrator. Filebeat can then be used to forward and aggregate all relatable data to a centralized location
+- Metricbeat can be utilized to record metrics and statistics in respect to each service being run on various systems. Similarly, Metricbeat will send all data to a centralized location for ease of monitoring.
 The configuration details of each machine may be found below.
 _Note: Use the [Markdown Table Generator](http://www.tablesgenerator.com/markdown_tables) to add/remove values from the table_.
 
-| Name     | Function | IP Address | Operating System |
-|----------|----------|------------|------------------|
-| Jump Box | Gateway  | 10.0.0.1   | Linux            |
-| TODO     |          |            |                  |
-| TODO     |          |            |                  |
-| TODO     |          |            |                  |
+| Name       | Function    | IP Address | Operating System |
+|------------|-------------|------------|------------------|
+| JumpBox VM | Gateway     | 10.0.0.4   | Linux(ubuntu)    |
+| Web-1 VM   | DVWA Server | 10.0.0.5   | Linux(ubuntu)    |
+| Web-2 VM   | DVWA Server | 10.0.0.7   | Linux(ubuntu)    |
+| Web-3 VM   | DVWA Server | 10.0.0.12  | Linux(ubuntu)    |
+| ELK VM     | ELK Stack   | 10.1.0.4   | Linux(ubuntu)    |
 
 ### Access Policies
 
 The machines on the internal network are not exposed to the public Internet. 
 
-Only the _____ machine can accept connections from the Internet. Access to this machine is only allowed from the following IP addresses:
-- _TODO: Add whitelisted IP addresses_
+Only the Jumpbox machine can accept connections from the Internet. Access to this machine is only allowed from my personal IP
+- *** ELK-VM also accepts public connections but only from my personal IP adress.
 
-Machines within the network can only be accessed by _____.
-- _TODO: Which machine did you allow to access your ELK VM? What was its IP address?_
+Machines within the network can only be accessed by jumpbox.
 
 A summary of the access policies in place can be found in the table below.
 
-| Name     | Publicly Accessible | Allowed IP Addresses |
-|----------|---------------------|----------------------|
-| Jump Box | Yes/No              | 10.0.0.1 10.0.0.2    |
-|          |                     |                      |
-|          |                     |                      |
+| Name       | Publicly Accessible | Allowed IP Address |
+|------------|---------------------|--------------------|
+| JumpBox VM | yes                 | *****/10.0.0.4     |
+| Web-1 VM   | no                  | *****/10.1.0.4     |
+| Web-2 VM   | no                  | 10.0.0.5           |
+| Web-3 VM   | no                  | 10.0.0.7           |
+| ELK VM     | yes                 | 10.0.0.12          |
 
 ### Elk Configuration
 
 Ansible was used to automate configuration of the ELK machine. No configuration was performed manually, which is advantageous because...
-- _TODO: What is the main advantage of automating configuration with Ansible?_
+- automation allows for the quick configuration of multiple containers. This allows both rapid elasticity as well as scalability.
 
 The playbook implements the following tasks:
-- _TODO: In 3-5 bullets, explain the steps of the ELK installation play. E.g., install Docker; download image; etc._
-- ...
-- ...
+   - Configure elk with Docker
+   - Increase virtual memory
+   - Use more memory
+   - Install Docker.io
+   - Install Python3-pip
+   - Install Python Docker Module
+   - Download and launch a Docker Web Container
+
+
 
 The following screenshot displays the result of running `docker ps` after successfully configuring the ELK instance.
 
@@ -78,25 +91,41 @@ The following screenshot displays the result of running `docker ps` after succes
 
 ### Target Machines & Beats
 This ELK server is configured to monitor the following machines:
-- _TODO: List the IP addresses of the machines you are monitoring_
+- Web-1: 10.0.0.5
+- web-2: 10.0.0.7
+- web-3: 10.0.0.12
 
 We have installed the following Beats on these machines:
-- _TODO: Specify which Beats you successfully installed_
+- filebeat
+- metricbeat
 
 These Beats allow us to collect the following information from each machine:
-- _TODO: In 1-2 sentences, explain what kind of data each beat collects, and provide 1 example of what you expect to see. E.g., `Winlogbeat` collects Windows logs, which we use to track user logon events, etc._
+- Metricbeat allows you to collect and analyze the metrics of your applications. Metricbeat will show Inbound and Outbound traffic, Memory usage, Disk usage, CPU usage, In and Out packet loss, and many other metrics.
+- Filebeat allows you to monitor and collect log files or location, you can find graphs depicting the traffic to your server, the amount of unique connections, and the type of errors received by these connections. As well as the source IP, geolocation, and url they accessed it from.
 
 ### Using the Playbook
 In order to use the playbook, you will need to have an Ansible control node already configured. Assuming you have such a control node provisioned: 
 
 SSH into the control node and follow the steps below:
-- Copy the _____ file to _____.
-- Update the _____ file to include...
-- Run the playbook, and navigate to ____ to check that the installation worked as expected.
+- Copy the used playbook file as a template for your YAML configs and playbooks.
+- Update the hosts file to include... all web servers IP for web1, web2, web3, and elk
 
-_TODO: Answer the following questions to fill in the blanks:_
-- _Which file is the playbook? Where do you copy it?_
-- _Which file do you update to make Ansible run the playbook on a specific machine? How do I specify which machine to install the ELK server on versus which to install Filebeat on?_
-- _Which URL do you navigate to in order to check that the ELK server is running?
 
-_As a **Bonus**, provide the specific commands the user will need to run to download the playbook, update the files, etc._
+Run the Web playbook to install dvwa on all three of the web servers, navigate to http://[Your.VM.Public.IP]/dvwa/setup.php to ensure the servers are up and running.
+
+    ansible-playbook installWeb.yml
+    nano /etc/ansible/hosts
+    nano installWeb.yml
+
+Run the elk playbook, and navigate to http://[Your.VM.Public.IP]:5601/app/kibana check that the installation worked as expected.
+
+    ansible-playbook install-elk.yml
+
+From there you can run the Filebeat and Metricbeat yaml files to start receiving data from the web servers.
+
+    ansible-playbook filebeat-playbook.yml
+    ansible-playbook metricbeat-playbook.yml
+
+
+
+
