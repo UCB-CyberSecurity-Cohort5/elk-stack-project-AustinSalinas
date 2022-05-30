@@ -1,5 +1,5 @@
 # ELK-Stack-Project
-<Austin Salinas> Project 1 - ELK Stack Project
+Austin Salinas Project 1 - ELK Stack Project
 
 ## Fill in this as your project documentation
 ## Automated ELK Stack Deployment
