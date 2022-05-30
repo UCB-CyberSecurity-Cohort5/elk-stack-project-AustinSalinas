@@ -1,23 +1,21 @@
 # ELK-Stack-Project
-Project 1 - ELK Stack Project
+<Austin Salinas> Project 1 - ELK Stack Project
 
 ## Fill in this as your project documentation
 ## Automated ELK Stack Deployment
 
-The files in this repository were used to configure the network depicted below.
-
-![image](https://user-images.githubusercontent.com/95393740/160325128-e69bacf1-8e31-450d-b12c-ee010357d2bc.png)
 
 
+![Diagram](https://user-images.githubusercontent.com/95393740/170905483-e4ba9dbc-3604-4d68-9523-dda5da78346c.jpg)
 
 These files have been tested and used to generate a live ELK deployment on Azure. They can be used to either recreate the entire deployment pictured above. Alternatively, select portions of the YAML file may be used to install only certain pieces of it, such as Filebeat.
 
-  - filebeat-config.yml
-  - filebeat-playbook.yml
-  - metricbeat-config.yml
-  - metricbeat-playbook.yml
-  - installWeb.yml
-  - install-elk.yml
+  - filebeat-config.yml (For configuring file beat and inputing IP's from cloud machines)
+  - filebeat-playbook.yml (Installs/deploys filebeat)
+  - metricbeat-config.yml (Metricbeat configuration)
+  - metricbeat-playbook.yml (Installs/deploys metricbeat)
+  - installWeb.yml (Configure WebVM's to launch DVWA containers)
+  - install-elk.yml (Deploys ELK server)
 
 This document contains the following details:
 - Description of the Topologu
@@ -40,7 +38,6 @@ Integrating an ELK server allows users to easily monitor the vulnerable VMs for 
 - Filebeat monitors log files for locations that can be specified by a system administrator. Filebeat can then be used to forward and aggregate all relatable data to a centralized location
 - Metricbeat can be utilized to record metrics and statistics in respect to each service being run on various systems. Similarly, Metricbeat will send all data to a centralized location for ease of monitoring.
 The configuration details of each machine may be found below.
-_Note: Use the [Markdown Table Generator](http://www.tablesgenerator.com/markdown_tables) to add/remove values from the table_.
 
 | Name       | Function    | IP Address | Operating System |
 |------------|-------------|------------|------------------|
@@ -109,7 +106,7 @@ In order to use the playbook, you will need to have an Ansible control node alre
 
 SSH into the control node and follow the steps below:
 - Copy the used playbook file as a template for your YAML configs and playbooks.
-- Update the hosts file to include... all web servers IP for web1, web2, web3, and elk
+- Update the hosts file to include... all web servers IP for web1(10.0.0.5), web2(10.0.0.7), web3(10.0.0.12), and elk(10.1.0.4)
 
 
 Run the Web playbook to install dvwa on all three of the web servers, navigate to http://[Your.VM.Public.IP]/dvwa/setup.php to ensure the servers are up and running.
