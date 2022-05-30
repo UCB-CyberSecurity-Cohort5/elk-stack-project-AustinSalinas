@@ -117,13 +117,19 @@ Run the Web playbook to install dvwa on all three of the web servers, navigate t
 
 Run the elk playbook, and navigate to http://[Your.VM.Public.IP]:5601/app/kibana check that the installation worked as expected.
 
-    ansible-playbook install-elk.yml
+  ansible-playbook install-elk.yml
+  
+![Kibana](https://user-images.githubusercontent.com/95393740/170912584-28c6e920-e0d8-47d6-bf2e-aa599db4ceea.jpg)
+   
+  
 
 From there you can run the Filebeat and Metricbeat yaml files to start receiving data from the web servers.
 
     ansible-playbook filebeat-playbook.yml
     ansible-playbook metricbeat-playbook.yml
-
-
-
-
+  
+  ![Filebeat](https://user-images.githubusercontent.com/95393740/170912660-618018ce-b3c2-45dd-bc19-e8414b132c95.jpg)
+![Metricbeat](https://user-images.githubusercontent.com/95393740/170912654-4ab93f09-45bb-4669-9543-045ddd395eaf.jpg)
+  
+  ### Quick Summary
+  - Throughout this project I was to set up a virtual cloud enviroment that was able to deploy an elk stack and monitor it via metricbeat and filebeat. With use of a Jumpbox, 3 web vm/dvwa containers, and a load balancer I was able to set up a network that would be suited to log all data to the ELK VM. By creating the ELK VM I was able to access Kibana and view all log files from the jumpbox and web containers. With help of many rules to allow proper flow over protocols and ports along with ssh this enviroment was able to interact with each component well.
