@@ -5,3 +5,4 @@ HASH=$1
 echo $HASH > crack.tmp
 john crack.tmp -w $WORDLIST --show
 rm crack.tmp
+
